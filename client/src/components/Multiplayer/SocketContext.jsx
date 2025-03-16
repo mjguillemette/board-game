@@ -56,6 +56,8 @@ export const SocketProvider = ({ children }) => {
         ...prev,
         players,
         currentTurn,
+        isGameStarted: true, // Set isGameStarted to true when joining
+        gameCode: prev.gameCode, // Ensure gameCode is preserved
         isMyTurn: players[currentTurn]?.id === newSocket.id
       }));
     });
@@ -120,6 +122,12 @@ export const SocketProvider = ({ children }) => {
 
   const joinGame = (gameCode) => {
     if (socket && connected) {
+      // Update local game state immediately to set the game code
+      setGameState(prev => ({
+        ...prev,
+        gameCode,
+        // Don't set isGameStarted yet - wait for server confirmation
+      }));
       socket.emit('join-game', { gameCode });
     } else {
       console.error('Cannot join game: not connected to server');

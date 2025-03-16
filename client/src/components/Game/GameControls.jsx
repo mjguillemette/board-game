@@ -11,27 +11,32 @@ const GameControls = ({ players, currentTurn, isMyTurn, playerId, winner }) => {
         <h2>Game Status</h2>
         
         {players.length < 2 ? (
-          <p>Waiting for another player to join...</p>
+          <div className="waiting-message">
+            <p>Waiting for another player to join...</p>
+            <p className="waiting-subtext">Share your game code for someone to join</p>
+          </div>
         ) : (
           <>
             <div className="players-info">
-              <div className={`player ${myPlayerNumber === 1 ? 'my-player' : ''}`}>
-                <div className="player-token" style={{ backgroundColor: '#ff0000' }}></div>
+              <div className={`player ${myPlayerNumber === 1 ? 'my-player' : ''} ${currentTurn === 0 ? 'current-player' : ''}`}>
+                <div className="player-token" style={{ backgroundColor: '#ff5722' }}></div>
                 <div className="player-details">
-                  <span className="player-name">Player 1 {myPlayerNumber === 1 ? '(You)' : ''}</span>
-                  <span className="player-position">
+                  <div className="player-name">Player 1 {myPlayerNumber === 1 ? '(You)' : ''}</div>
+                  <div className="player-position">
                     Position: {players[0]?.position || 0}/20
-                  </span>
+                  </div>
+                  {currentTurn === 0 && <div className="player-status">Current Turn</div>}
                 </div>
               </div>
               
-              <div className={`player ${myPlayerNumber === 2 ? 'my-player' : ''}`}>
-                <div className="player-token" style={{ backgroundColor: '#0000ff' }}></div>
+              <div className={`player ${myPlayerNumber === 2 ? 'my-player' : ''} ${currentTurn === 1 ? 'current-player' : ''}`}>
+                <div className="player-token" style={{ backgroundColor: '#2196f3' }}></div>
                 <div className="player-details">
-                  <span className="player-name">Player 2 {myPlayerNumber === 2 ? '(You)' : ''}</span>
-                  <span className="player-position">
+                  <div className="player-name">Player 2 {myPlayerNumber === 2 ? '(You)' : ''}</div>
+                  <div className="player-position">
                     Position: {players[1]?.position || 0}/20
-                  </span>
+                  </div>
+                  {currentTurn === 1 && <div className="player-status">Current Turn</div>}
                 </div>
               </div>
             </div>
@@ -64,9 +69,9 @@ const GameControls = ({ players, currentTurn, isMyTurn, playerId, winner }) => {
       <div className="game-instructions">
         <h3>How to Play</h3>
         <ol>
-          <li>Create a game or join with a game code</li>
           <li>Take turns rolling the dice</li>
-          <li>Move around the board based on your roll</li>
+          <li>Your token moves forward by the number rolled</li>
+          <li>Navigate around the board</li>
           <li>First player to reach space 20 wins!</li>
         </ol>
       </div>
