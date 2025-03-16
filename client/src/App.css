@@ -718,3 +718,163 @@ body, html {
 .game-instructions li:last-child {
   margin-bottom: 0;
 }
+/* Dice Panel - Container for both player dice */
+.dice-panel {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.5rem;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 8px;
+  backdrop-filter: blur(5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  z-index: 5;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* Individual dice container */
+.dice-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.5rem 1rem 1rem 1rem;
+  min-width: 120px;
+  position: relative;
+}
+
+/* Player 1 and Player 2 dice styles with borders */
+.player1-dice {
+  border-left: 2px solid #FF5722;
+}
+
+.player2-dice {
+  border-left: 2px solid #2196F3;
+}
+
+/* Player header */
+.player-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  font-size: 0.85rem;
+  padding: 0.25rem 0;
+}
+
+.player-label {
+  color: white;
+  font-weight: 500;
+}
+
+.current-turn-badge {
+  background-color: #FF9800;
+  color: white;
+  padding: 0.15rem 0.5rem;
+  border-radius: 50px;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+/* Style for dice on their turn */
+.dice-container.current-turn {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* 3D dice container */
+.dice-3d {
+  width: 100px !important;
+  height: 100px !important;
+  margin-bottom: 0.8rem;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+/* Dice value indicators */
+.dice-value-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  font-weight: 600;
+  font-size: 14px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+}
+
+.player1-indicator {
+  background-color: #FF5722;
+  color: white;
+}
+
+.player2-indicator {
+  background-color: #2196F3;
+  color: white;
+}
+
+/* Button styling */
+.roll-button {
+  width: 100%;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 0.5rem 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  outline: none;
+  letter-spacing: 1px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.orange-button {
+  background-color: #FF9800;
+}
+
+.blue-button {
+  background-color: #2196F3;
+}
+
+.orange-button:hover {
+  background-color: #F57C00;
+}
+
+.blue-button:hover {
+  background-color: #1976D2;
+}
+
+.roll-button:disabled {
+  background-color: #757575;
+  cursor: not-allowed;
+}
+
+/* Dice value text display */
+.dice-value-text {
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.8);
+  white-space: nowrap;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .dice-panel {
+    flex-direction: column;
+    width: auto;
+    max-width: 180px;
+  }
+  
+  .dice-container {
+    width: 100%;
+  }
+  
+  .player2-dice {
+    border-left: none;
+    border-top: 2px solid #2196F3;
+  }
+}

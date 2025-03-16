@@ -66,7 +66,7 @@ io.on('connection', (socket) => {
   });
 
   // Roll dice and move player
-  socket.on('roll-dice', ({ gameCode }) => {
+  socket.on('roll-dice', ({ gameCode, diceValue }) => {
     const game = games[gameCode];
     
     if (!game) return;
@@ -78,12 +78,18 @@ io.on('connection', (socket) => {
       return;
     }
     
-    // Roll dice (1-6)
-    const diceValue = Math.floor(Math.random() * 6) + 1;
+    // Use client-provided dice value if available, otherwise generate one
+    const rollValue = diceValue !== null ? diceValue : Math.floor(Math.random() * 6) + 1;
+    
+    // Validate dice value is between 1-6
+    if (rollValue < 1 || rollValue > 6) {
+      socket.emit('error', { message: 'Invalid dice value' });
+      return;
+    }
     
     // Update player position
     const player = game.players[playerIndex];
-    player.position = Math.min(player.position + diceValue, 20); // Max position is 20
+    player.position = Math.min(player.position + rollValue, 20); // Max position is 20
     
     // Switch turns
     game.currentTurn = (game.currentTurn + 1) % game.players.length;
@@ -94,7 +100,7 @@ io.on('connection', (socket) => {
       currentTurn: game.currentTurn,
       lastRoll: {
         playerId: socket.id,
-        diceValue
+        diceValue: rollValue
       }
     });
     

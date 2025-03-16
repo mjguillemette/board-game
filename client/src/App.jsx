@@ -14,11 +14,27 @@ import GameTester from './components/Game/GameTester';
 function App() {
   const { gameState, rollDice } = useSocket();
   const [debugMode, setDebugMode] = useState(false);
-
+  
   // Toggle debug panel
   const toggleDebugMode = () => {
     setDebugMode(!debugMode);
   };
+  
+  // Handle roll with final value
+  const handleRoll = (value) => {
+    rollDice(value);
+  };
+
+  // Determine player numbers (which player is player1/player2)
+  const getPlayerType = (index) => {
+    return index === 0 ? 'player1' : 'player2';
+  };
+  
+  // Check if enough players to start the game
+  const hasEnoughPlayers = gameState.players.length >= 2;
+  
+  // Find my player index
+  const myPlayerIndex = gameState.players.findIndex(player => player.id === gameState.playerId);
 
   return (
     <div className="app">
@@ -68,24 +84,26 @@ function App() {
                 />
               </div>
               
-              {gameState.isMyTurn && !gameState.winner && (
-                <div className="dice-container">
-                  <Dice onRoll={rollDice} lastRoll={gameState.lastRoll} />
+              {/* Dice Panel - Show both player dice when game has enough players */}
+              {hasEnoughPlayers && !gameState.winner && (
+                <div className="dice-panel">
+                  {gameState.players.map((player, index) => (
+                    <Dice 
+                      key={player.id}
+                      onRoll={handleRoll}
+                      lastRoll={gameState.lastRoll}
+                      playerType={getPlayerType(index)}
+                      isCurrentTurn={gameState.currentTurn === index}
+                      playerId={gameState.playerId}
+                      isMyDice={player.id === gameState.playerId}
+                    />
+                  ))}
                 </div>
               )}
               
               {gameState.error && (
                 <div className="notification error-notification">
                   <span className="notification-message">{gameState.error}</span>
-                </div>
-              )}
-              
-              {gameState.lastRoll && !gameState.winner && (
-                <div className="notification roll-notification">
-                  <span className="roll-label">
-                    {gameState.lastRoll.playerId === gameState.playerId ? 'You' : 'Opponent'} rolled:
-                  </span>
-                  <span className="roll-value">{gameState.lastRoll.diceValue}</span>
                 </div>
               )}
             </div>

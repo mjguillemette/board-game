@@ -15,7 +15,8 @@ export const SocketProvider = ({ children }) => {
     isGameStarted: false,
     playerId: '',
     winner: null,
-    error: ''
+    error: '',
+    pendingRoll: false
   });
 
   useEffect(() => {
@@ -64,12 +65,24 @@ export const SocketProvider = ({ children }) => {
 
     newSocket.on('game-updated', ({ players, currentTurn, lastRoll }) => {
       console.log('Game updated:', { players, currentTurn, lastRoll });
+      
+      // Determine player type (player1 or player2) based on the player's index
+      const playerIndex = players.findIndex(player => player.id === lastRoll.playerId);
+      const playerType = playerIndex === 0 ? 'player1' : 'player2';
+      
+      // Add player type to the last roll data
+      const enhancedLastRoll = {
+        ...lastRoll,
+        playerType
+      };
+      
       setGameState(prev => ({
         ...prev,
         players,
         currentTurn,
-        lastRoll,
-        isMyTurn: players[currentTurn]?.id === newSocket.id
+        lastRoll: enhancedLastRoll,
+        isMyTurn: players[currentTurn]?.id === newSocket.id,
+        pendingRoll: false
       }));
     });
 
@@ -96,7 +109,8 @@ export const SocketProvider = ({ children }) => {
       console.error('Game error:', message);
       setGameState(prev => ({
         ...prev,
-        error: message
+        error: message,
+        pendingRoll: false
       }));
       
       // Clear error after 3 seconds
@@ -134,11 +148,23 @@ export const SocketProvider = ({ children }) => {
     }
   };
 
-  const rollDice = () => {
-    if (socket && connected && gameState.isMyTurn) {
-      socket.emit('roll-dice', { gameCode: gameState.gameCode });
+  // Enhanced rollDice that accepts a specific dice value
+  const rollDice = (diceValue = null) => {
+    if (socket && connected && gameState.isMyTurn && !gameState.pendingRoll) {
+      // Set pendingRoll to true to prevent multiple rolls
+      setGameState(prev => ({
+        ...prev,
+        pendingRoll: true
+      }));
+      
+      // If diceValue is provided, send it to the server
+      // Otherwise, the server will generate a random value
+      socket.emit('roll-dice', { 
+        gameCode: gameState.gameCode,
+        diceValue
+      });
     } else {
-      console.error('Cannot roll dice: not your turn or not connected');
+      console.error('Cannot roll dice: not your turn, pending roll, or not connected');
     }
   };
 
