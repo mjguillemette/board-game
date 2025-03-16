@@ -1,0 +1,83 @@
+.game-tester {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  padding: 15px;
+  margin: 20px 0;
+}
+
+.game-tester h3 {
+  margin-top: 0;
+  color: #343a40;
+  border-bottom: 1px solid #dee2e6;
+  padding-bottom: 10px;
+}
+
+.test-section {
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.test-section h4 {
+  margin-top: 0;
+  color: #495057;
+  font-size: 16px;
+}
+
+.status-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+  border-bottom: 1px dotted #e9ecef;
+}
+
+.status-item:last-child {
+  border-bottom: none;
+}
+
+.status-ok {
+  color: #28a745;
+  font-weight: bold;
+}
+
+.status-error {
+  color: #dc3545;
+  font-weight: bold;
+}
+
+.status-waiting {
+  color: #ffc107;
+  font-weight: bold;
+}
+
+.test-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.test-button:hover {
+  background-color: #0069d9;
+}
+
+.test-button:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+.winner-section {
+  background-color: #f8f9d7;
+  border: 1px solid #ffeeba;
+}
+
+.winner-section h4 {
+  color: #856404;
+}

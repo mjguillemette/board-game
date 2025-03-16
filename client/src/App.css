@@ -1,0 +1,202 @@
+.App {
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.App-header {
+  background-color: #282c34;
+  padding: 20px;
+  color: white;
+}
+
+.game-code {
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+.game-code span {
+  background-color: #4a4a4a;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.game-setup {
+  margin: 40px auto;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.game-setup button {
+  padding: 12px 20px;
+  font-size: 16px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.game-setup button:hover {
+  background-color: #45a049;
+}
+
+.join-game {
+  display: flex;
+  gap: 10px;
+}
+
+.join-game input {
+  flex: 1;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.join-game button {
+  background-color: #2196f3;
+}
+
+.join-game button:hover {
+  background-color: #0b7dda;
+}
+
+.game-container {
+  display: flex;
+  flex-direction: column;
+  margin: 20px auto;
+  max-width: 1000px;
+}
+
+.game-board {
+  height: 500px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.game-controls {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+}
+
+.dice-container {
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dice-3d {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 20px;
+}
+
+.roll-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #ff9800;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.roll-button:hover {
+  background-color: #e68a00;
+}
+
+.roll-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.players-info {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px 0;
+}
+
+.player {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.my-player {
+  background-color: rgba(0, 255, 0, 0.1);
+}
+
+.player-token {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.player-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.player-name {
+  font-weight: bold;
+}
+
+.turn-indicator {
+  margin: 20px 0;
+  padding: 10px;
+  background-color: #e3f2fd;
+  border-radius: 4px;
+}
+
+.game-over {
+  margin: 20px 0;
+  padding: 20px;
+  background-color: #ffebee;
+  border-radius: 4px;
+  color: #d32f2f;
+}
+
+.last-roll {
+  margin: 10px 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.error-message {
+  margin: 10px 0;
+  padding: 10px;
+  background-color: #ffebee;
+  color: #d32f2f;
+  border-radius: 4px;
+}
+
+.game-instructions {
+  margin-top: 30px;
+  text-align: left;
+  padding: 15px;
+  background-color: #f0f0f0;
+  border-radius: 4px;
+}
+
+.game-instructions ol {
+  margin-left: 20px;
+}
+
+.game-controls-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
